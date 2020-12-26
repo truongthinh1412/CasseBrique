@@ -56,7 +56,7 @@ namespace CasseBrique
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             base.Draw(gameTime);
         }
     }
