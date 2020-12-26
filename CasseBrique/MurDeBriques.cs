@@ -32,13 +32,5 @@ namespace CasseBrique
                 this.Game.Components.Add(brique);
             }
         } 
-
-
-        public override void Update(GameTime gameTime)
-        {
-
-
-            base.Update(gameTime);
-        }
     }
 }
