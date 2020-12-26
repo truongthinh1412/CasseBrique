@@ -9,8 +9,8 @@ namespace CasseBrique
 {
     class Brique : Element2D
     {
-        int x;
-        int y;
+        public int x;
+        public int y;
 
         public Brique(Game game, String texture) : base(game, texture, new Vector2(0, 0))
         {
@@ -23,15 +23,12 @@ namespace CasseBrique
         public override void Initialize()
         { 
             this.frame = new Rectangle(0, 0, texture2D.Width, texture2D.Height);
+            position.X = x;
+            position.Y = y;
             base.Initialize();
 
         }
 
-        public override void Update(GameTime gameTime)
-        {
-            position.X = x;
-            position.Y = y;
-        }
 
         public Rectangle get_rectangle()
         {
