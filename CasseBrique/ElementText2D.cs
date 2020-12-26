@@ -20,7 +20,7 @@ namespace CasseBrique
         protected override void LoadContent()
         {
             this.spriteBatch = new SpriteBatch((this.Game).GraphicsDevice);
-            this._font = ((Game) this.Game).Content.Load<SpriteFont>("SpriteFont/Score");
+            this._font = this.Game.Content.Load<SpriteFont>("SpriteFont/Score");
             base.LoadContent();
         }
 
