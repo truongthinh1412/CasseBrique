@@ -38,6 +38,7 @@ namespace CasseBrique
             }
             
             if (!start) {
+
                 position.X = (int) raquette.position.X;
                 position.Y = (int) raquette.position.Y - texture2D.Height;
                 
