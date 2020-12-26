@@ -12,7 +12,7 @@ namespace CasseBrique
         protected int vitesseX;
         protected int vitesseY;
 
-        public Balle(Raquette r, Game game, String texture, MurDeBriques mu) : base(game, texture, new Vector2(0,0))
+        public Balle(Raquette r, Game game, String texture, MurDeBriques mu) : base(game, texture, new Vector2(0, 0))
         {
             raquette = r;
             murDeBriques = mu;
@@ -26,6 +26,15 @@ namespace CasseBrique
             base.Initialize();
         }
 
+        public void changeDirectionX()
+        {
+            vitesseX = 0 - vitesseX;
+        }
+
+        public void changeDirectionY()
+        {
+            vitesseY = 0 - vitesseY;
+        }
         public override void Update(GameTime gameTime)
         {
             MouseState current_mouse = Mouse.GetState();
@@ -34,71 +43,63 @@ namespace CasseBrique
             {
                 start = true;
             }
-            
-            if (!start) {
 
-                position.X = (int) raquette.position.X;
-                position.Y = (int) raquette.position.Y - texture2D.Height;
-                
-            } else
+            if (!start)
+            {
+
+                position.X = (int)raquette.position.X;
+                position.Y = (int)raquette.position.Y - texture2D.Height;
+
+            }
+            else
             {
                 if (position.X < 0 || position.X > 800 - texture2D.Width)
                 {
-                    vitesseX = 0 - vitesseX;
+                    changeDirectionX();
                 }
-                
+
 
                 if (position.Y < 0 || position.Y > 600 - texture2D.Height)
                 {
-                    vitesseY = 0 - vitesseY;
+                    changeDirectionY();
                 }
 
-                if(raquette.position.X < position.X + texture2D.Width  && position.X < raquette.position.X + raquette.texture2D.Width)
+                if ((raquette.position.X < position.X + texture2D.Width && position.X < raquette.position.X + raquette.texture2D.Width) && ((position.Y + texture2D.Height == raquette.position.Y) && (vitesseY > 0)))
                 {
-                    if(position.Y + texture2D.Height == raquette.position.Y)
-                    {
-                        if (vitesseY > 0)
-                        {
-                            vitesseY = 0 - vitesseY;
-                        }
-                    }
+                    changeDirectionY();
                 }
 
-                for(int i = 0; i < murDeBriques.nbBriques; i++)
+                for (int i = 0; i < murDeBriques.nbBriques; i++)
                 {
                     Brique b = murDeBriques.briques[i];
-                    
+
                     if (b.position.X < position.X + texture2D.Width && position.X < b.position.X + b.texture2D.Width)
                     {
-                        if (position.Y + texture2D.Height == b.position.Y)
+                        if ((position.Y + texture2D.Height == b.position.Y) && (vitesseY > 0))
                         {
-                            if (vitesseY > 0)
-                            {
-                                vitesseY = 0 - vitesseY;
-                                this.Game.Components.Remove(b);
-                                b.position.X = -500;
-                                b.position.Y = -500;
-                            }
+                            changeDirectionY();
+                            this.Game.Components.Remove(b);
+                            b.position.X = -500;
+                            b.position.Y = -500;
                         }
 
-                        if (position.Y == b.position.Y + b.texture2D.Height)
+                        if ((position.Y == b.position.Y + b.texture2D.Height) && (vitesseY < 0))
                         {
-                            if (vitesseY < 0)
-                            {
-                                vitesseY = 0 - vitesseY;
-                                this.Game.Components.Remove(b);
-                                b.position.X = -500;
-                                b.position.Y = -500;
-                            }
+
+                            changeDirectionY();
+                            this.Game.Components.Remove(b);
+                            b.position.X = -500;
+                            b.position.Y = -500;
+
                         }
                     }
 
-                    
+
 
                     Rectangle temp = Rectangle.Intersect(get_rectangle(), b.get_rectangle());
-                    if(temp.Width > 0)
+                    if (temp.Width > 0)
                     {
-                        vitesseX = 0 - vitesseX;
+                        changeDirectionX();
                         this.Game.Components.Remove(b);
                         b.position.X = -500;
                         b.position.Y = -500;
@@ -113,7 +114,6 @@ namespace CasseBrique
             }
             base.Update(gameTime);
         }
-
 
         public Rectangle get_rectangle()
         {
