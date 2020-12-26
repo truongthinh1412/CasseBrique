@@ -14,7 +14,7 @@ namespace CasseBrique
         protected Element2D(Game game, String texture, Vector2 position) : base(game)
         {
             this.position = position;
-            this.texture2D = ((Game) this.Game).Content.Load<Texture2D>(texture);
+            this.texture2D = this.Game.Content.Load<Texture2D>(texture);
         }
 
         public override void Initialize()
