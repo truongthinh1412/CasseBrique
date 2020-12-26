@@ -17,7 +17,7 @@ namespace CasseBrique
         {
             raquette = r;
             vitesseX = 1;
-            vitesseY = 1;
+            vitesseY = -1;
         }
 
         public override void Initialize()

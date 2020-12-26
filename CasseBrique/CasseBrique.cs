@@ -24,10 +24,10 @@ namespace CasseBrique
 
         protected override void Initialize()
         {
-            this.raquette = new Raquette(this, "Textures/RedStar");
+            this.raquette = new Raquette(this, "Textures/wall");
             this.Components.Add(this.raquette);
 
-            this.balle1 = new Balle(raquette, this, "Textures/YellowStar");
+            this.balle1 = new Balle(raquette, this, "Textures/ball");
             this.Components.Add(this.balle1);
             base.Initialize();
             this._graphics.IsFullScreen = false;
