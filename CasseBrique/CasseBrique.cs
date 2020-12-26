@@ -7,11 +7,11 @@ namespace CasseBrique
 {
     public class CasseBrique : Game
     {
-        private GraphicsDeviceManager _graphics;
+        private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private HUD hud;
+        private Hud hud;
         private Raquette raquette;
-        List<Balle> balles = new List<Balle>();
+        readonly List<Balle> balles = new List<Balle>();
         private MurDeBriques mu;
 
 
@@ -25,8 +25,7 @@ namespace CasseBrique
         protected override void Initialize()
         {
 
-
-            this.hud = new HUD(this, "score", new Vector2(10, 10));
+            this.hud = new Hud(this, "score", new Vector2(10, 10));
             this.Components.Add(this.hud);
 
             this.raquette = new Raquette(this, "Textures/whiteSquare");
@@ -49,8 +48,6 @@ namespace CasseBrique
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
