@@ -12,8 +12,9 @@ namespace CasseBrique
 
         }
 
-        public void update(GameTime gameTime)
+        public void update_text(string text)
         {
+            this.text = text;
         }
     }
 }

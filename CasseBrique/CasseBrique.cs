@@ -19,14 +19,18 @@ namespace CasseBrique
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            IsMouseVisible = false;
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            this.raquette = new Raquette(this, "Textures/crosshair");
+            this.Components.Add(this.raquette);
             base.Initialize();
+            this._graphics.IsFullScreen = false;
+            this._graphics.PreferredBackBufferWidth = 800;
+            this._graphics.PreferredBackBufferHeight = 600;
+            this._graphics.ApplyChanges();
         }
 
         protected override void LoadContent()
@@ -40,17 +44,13 @@ namespace CasseBrique
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
-
+            
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }

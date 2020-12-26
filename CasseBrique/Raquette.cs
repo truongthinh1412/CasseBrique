@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,9 +8,48 @@ namespace CasseBrique
 {
     class Raquette : Element2D
     {
-        protected Raquette(Game game, String texture, Vector2 position) : base(game, texture, position)
+        public Raquette(Game game, String texture) : base(game, texture, new Vector2(0, 0))
         {
 
+        }
+
+        public override void Initialize()
+        {
+            this.frame = new Rectangle(0, 0, texture2D.Width, texture2D.Height);
+            base.Initialize();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            MouseState current_mouse = Mouse.GetState();
+
+            position.X = current_mouse.X;
+            position.Y = current_mouse.Y;
+
+            if (position.X > this.Game.GraphicsDevice.PresentationParameters.BackBufferWidth - (texture2D.Width / 2))
+            {
+                position.X = this.Game.GraphicsDevice.PresentationParameters.BackBufferWidth - (texture2D.Width / 2);
+            }
+            else if (position.X < -(texture2D.Width / 2))
+            {
+                position.X = -(texture2D.Width / 2);
+            }
+
+            if (position.Y > this.Game.GraphicsDevice.PresentationParameters.BackBufferHeight - (texture2D.Height / 2))
+            {
+                position.Y = this.Game.GraphicsDevice.PresentationParameters.BackBufferHeight - (texture2D.Height / 2);
+            }
+            else if (position.Y < -(texture2D.Height / 2))
+            {
+                position.Y = -(texture2D.Height / 2);
+            }
+
+            base.Update(gameTime);
+        }
+
+        public Rectangle get_rectangle()
+        {
+            return new Rectangle((int)this.position.X, (int)this.position.Y, this.texture2D.Width, this.texture2D.Height);
         }
     }
 }
