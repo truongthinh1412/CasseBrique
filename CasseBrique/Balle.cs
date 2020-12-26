@@ -16,8 +16,8 @@ namespace CasseBrique
         public Balle(Raquette r, Game game, String texture) : base(game, texture, new Vector2(0,0))
         {
             raquette = r;
-            vitesseX = 1;
-            vitesseY = -1;
+            vitesseX = 3;
+            vitesseY = -3;
         }
 
         public override void Initialize()
@@ -41,16 +41,28 @@ namespace CasseBrique
                 
             } else
             {
-                if (position.X < 0 || position.X > 800)
+                if (position.X < 0 || position.X > 800 - texture2D.Width)
                 {
                     vitesseX = 0 - vitesseX;
                 }
-                position.X += vitesseX;
+                
 
-                if (position.Y < 0 || position.Y > 600)
+                if (position.Y < 0 || position.Y > 600 - texture2D.Height)
                 {
                     vitesseY = 0 - vitesseY;
                 }
+
+                if(raquette.position.X < position.X + (texture2D.Width / 2)  && position.X + (texture2D.Width / 2) < raquette.position.X + raquette.texture2D.Width)
+                {
+                    if(position.Y + texture2D.Height > raquette.position.Y)
+                    {
+                        vitesseY = 0 - vitesseY;
+                    }
+                }
+
+                
+
+                position.X += vitesseX;
                 position.Y += vitesseY;
             }
             base.Update(gameTime);
