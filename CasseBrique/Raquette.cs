@@ -24,7 +24,7 @@ namespace CasseBrique
             MouseState current_mouse = Mouse.GetState();
 
             position.X = current_mouse.X;
-            position.Y = 550;
+            position.Y = 500;
 
             if (position.X > this.Game.GraphicsDevice.PresentationParameters.BackBufferWidth - (texture2D.Width / 2))
             {

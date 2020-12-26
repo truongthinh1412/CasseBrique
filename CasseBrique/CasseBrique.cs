@@ -24,8 +24,11 @@ namespace CasseBrique
 
         protected override void Initialize()
         {
-            this.raquette = new Raquette(this, "Textures/crosshair");
+            this.raquette = new Raquette(this, "Textures/RedStar");
             this.Components.Add(this.raquette);
+
+            this.balle1 = new Balle(raquette, this, "Textures/YellowStar");
+            this.Components.Add(this.balle1);
             base.Initialize();
             this._graphics.IsFullScreen = false;
             this._graphics.PreferredBackBufferWidth = 800;

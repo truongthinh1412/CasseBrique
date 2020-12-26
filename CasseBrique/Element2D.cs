@@ -6,10 +6,10 @@ namespace CasseBrique
 {
     abstract class Element2D : DrawableGameComponent
     {
-        protected Vector2 position;
-        protected SpriteBatch spriteBatch;
-        protected Texture2D texture2D;
-        protected Rectangle frame;
+        public Vector2 position;
+        public SpriteBatch spriteBatch;
+        public Texture2D texture2D;
+        public Rectangle frame;
 
         protected Element2D(Game game, String texture, Vector2 position) : base(game)
         {
