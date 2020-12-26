@@ -9,15 +9,17 @@ namespace CasseBrique
     class Balle : Element2D
     {
         private Raquette raquette;
+        private MurDeBriques murDeBriques;
         private Boolean start;
         protected int vitesseX;
         protected int vitesseY;
 
-        public Balle(Raquette r, Game game, String texture) : base(game, texture, new Vector2(0,0))
+        public Balle(Raquette r, Game game, String texture, MurDeBriques mu) : base(game, texture, new Vector2(0,0))
         {
             raquette = r;
+            murDeBriques = mu;
             vitesseX = 3;
-            vitesseY = -3;
+            vitesseY = 3;
         }
 
         public override void Initialize()
@@ -36,8 +38,8 @@ namespace CasseBrique
             }
             
             if (!start) {
-                position.X = (int)raquette.position.X;
-                position.Y = (int)raquette.position.Y - texture2D.Height;
+                position.X = (int) raquette.position.X;
+                position.Y = (int) raquette.position.Y - texture2D.Height;
                 
             } else
             {
@@ -52,15 +54,51 @@ namespace CasseBrique
                     vitesseY = 0 - vitesseY;
                 }
 
-                if(raquette.position.X < position.X + (texture2D.Width / 2)  && position.X + (texture2D.Width / 2) < raquette.position.X + raquette.texture2D.Width)
+                if(raquette.position.X < position.X + texture2D.Width  && position.X < raquette.position.X + raquette.texture2D.Width)
                 {
-                    if(position.Y + texture2D.Height > raquette.position.Y)
+                    if(position.Y + texture2D.Height == raquette.position.Y)
                     {
-                        vitesseY = 0 - vitesseY;
+                        if (vitesseY > 0)
+                        {
+                            vitesseY = 0 - vitesseY;
+                        }
                     }
                 }
 
-                
+                for(int i = 0; i < murDeBriques.nbBriques; i++)
+                {
+                    Brique b = murDeBriques.briques[i];
+
+                    if (b.position.X < position.X + texture2D.Width && position.X < b.position.X + b.texture2D.Width)
+                    {
+                        if (position.Y + texture2D.Height == b.position.Y)
+                        {
+                            if (vitesseY > 0)
+                            {
+                                vitesseY = 0 - vitesseY;
+                            }
+                        }
+
+                        if (position.Y == b.position.Y + b.texture2D.Height)
+                        {
+                            if (vitesseY < 0)
+                            {
+                                vitesseY = 0 - vitesseY;
+                            }
+                        }
+                    }
+
+                    
+
+                    Rectangle temp = Rectangle.Intersect(get_rectangle(), b.get_rectangle());
+                    if(temp.Width > 0)
+                    {
+                        vitesseX = 0 - vitesseX;                    
+                    }
+
+
+
+                }
 
                 position.X += vitesseX;
                 position.Y += vitesseY;

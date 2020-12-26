@@ -7,7 +7,7 @@ namespace CasseBrique
 {
     class HUD : ElementText2D
     {
-        public HUD(Game game, Vector2 position) : base(game, "Score", position)
+        public HUD(Game game, String text, Vector2 position) : base(game, text, position)
         {
 
         }

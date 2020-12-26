@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace CasseBrique
 {
@@ -10,9 +11,8 @@ namespace CasseBrique
         private SpriteBatch _spriteBatch;
         private HUD hud;
         private Raquette raquette;
-        private Balle balle1;
-        private Balle balle2;
-        private Balle balle3;
+        List<Balle> balles = new List<Balle>();
+        private MurDeBriques mu;
 
 
         public CasseBrique()
@@ -24,14 +24,21 @@ namespace CasseBrique
 
         protected override void Initialize()
         {
-            this.hud = new HUD(this, new Vector2(10, 10));
+
+
+            this.hud = new HUD(this, "score", new Vector2(10, 10));
             this.Components.Add(this.hud);
 
-            this.raquette = new Raquette(this, "Textures/raquette");
+            this.raquette = new Raquette(this, "Textures/whiteSquare");
             this.Components.Add(this.raquette);
 
-            this.balle1 = new Balle(raquette, this, "Textures/ball");
-            this.Components.Add(this.balle1);
+            this.mu = new MurDeBriques(this);
+            this.Components.Add(mu);
+
+            Balle balle1 = new Balle(raquette, this, "Textures/ball", mu);
+            balles.Add(balle1);
+            this.Components.Add(balle1);
+
             base.Initialize();
             this._graphics.IsFullScreen = false;
             this._graphics.PreferredBackBufferWidth = 800;
@@ -50,13 +57,13 @@ namespace CasseBrique
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.DarkGreen);
             base.Draw(gameTime);
         }
     }
