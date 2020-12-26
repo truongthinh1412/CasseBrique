@@ -8,11 +8,7 @@ namespace CasseBrique
     public class CasseBrique : Game
     {
         private readonly GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        private Hud hud;
-        private Raquette raquette;
-        readonly List<Balle> balles = new List<Balle>();
-        private MurDeBriques mu;
+        readonly List<Balle> balles = new List<Balle>(); 
 
 
         public CasseBrique()
@@ -24,14 +20,16 @@ namespace CasseBrique
 
         protected override void Initialize()
         {
+            Raquette raquette;
+            Hud hud;
+            MurDeBriques mu;
+            hud = new Hud(this, "score", new Vector2(10, 10));
+            this.Components.Add(hud);
 
-            this.hud = new Hud(this, "score", new Vector2(10, 10));
-            this.Components.Add(this.hud);
+            raquette = new Raquette(this, "Textures/whiteSquare");
+            this.Components.Add(raquette);
 
-            this.raquette = new Raquette(this, "Textures/whiteSquare");
-            this.Components.Add(this.raquette);
-
-            this.mu = new MurDeBriques(this);
+            mu = new MurDeBriques(this);
             this.Components.Add(mu);
 
             Balle balle1 = new Balle(raquette, this, "Textures/ball", mu);
@@ -43,11 +41,6 @@ namespace CasseBrique
             this._graphics.PreferredBackBufferWidth = 800;
             this._graphics.PreferredBackBufferHeight = 600;
             this._graphics.ApplyChanges();
-        }
-
-        protected override void LoadContent()
-        {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         protected override void Update(GameTime gameTime)
