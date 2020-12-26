@@ -68,7 +68,7 @@ namespace CasseBrique
                 for(int i = 0; i < murDeBriques.nbBriques; i++)
                 {
                     Brique b = murDeBriques.briques[i];
-
+                    
                     if (b.position.X < position.X + texture2D.Width && position.X < b.position.X + b.texture2D.Width)
                     {
                         if (position.Y + texture2D.Height == b.position.Y)
@@ -76,6 +76,9 @@ namespace CasseBrique
                             if (vitesseY > 0)
                             {
                                 vitesseY = 0 - vitesseY;
+                                this.Game.Components.Remove(b);
+                                b.position.X = -500;
+                                b.position.Y = -500;
                             }
                         }
 
@@ -84,6 +87,9 @@ namespace CasseBrique
                             if (vitesseY < 0)
                             {
                                 vitesseY = 0 - vitesseY;
+                                this.Game.Components.Remove(b);
+                                b.position.X = -500;
+                                b.position.Y = -500;
                             }
                         }
                     }
@@ -93,7 +99,10 @@ namespace CasseBrique
                     Rectangle temp = Rectangle.Intersect(get_rectangle(), b.get_rectangle());
                     if(temp.Width > 0)
                     {
-                        vitesseX = 0 - vitesseX;                    
+                        vitesseX = 0 - vitesseX;
+                        this.Game.Components.Remove(b);
+                        b.position.X = -500;
+                        b.position.Y = -500;
                     }
 
 

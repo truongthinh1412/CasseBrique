@@ -21,9 +21,10 @@ namespace CasseBrique
         }
 
         public override void Initialize()
-        {
+        { 
             this.frame = new Rectangle(0, 0, texture2D.Width, texture2D.Height);
             base.Initialize();
+
         }
 
         public override void Update(GameTime gameTime)
