@@ -1,15 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CasseBrique
 {
     class Balle : Element2D
     {
-        private Raquette raquette;
-        private MurDeBriques murDeBriques;
+        private readonly Raquette raquette;
+        private readonly MurDeBriques murDeBriques;
         private Boolean start;
         protected int vitesseX;
         protected int vitesseY;
