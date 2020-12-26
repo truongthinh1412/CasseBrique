@@ -1,13 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CasseBrique
 {
-    class HUD : ElementText2D
+    class Hud : ElementText2D
     {
-        public HUD(Game game, String text, Vector2 position) : base(game, text, position)
+        public Hud(Game game, String text, Vector2 position) : base(game, text, position)
         {
 
         }
